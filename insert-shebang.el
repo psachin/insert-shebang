@@ -9,14 +9,18 @@ and insert a shabang line"
 	(progn
 	  (message "file is BASH")
 	  (goto-char (point-min))
-	  (insert-string "#!/bin/bash")
+	  (let ((sh-str (shell-command-to-string "which bash")))
+	    (insert-string "#!"sh-str))
+	  ;;(insert-string "#!/bin/bash")
 	  )
 ;;	(message "extension does not match")
 	(if (equal extname "py")
 	    (progn
 	      (message "file is PYTHON")
 	      (goto-char (point-min))
-	      (insert-string "#!/usr/bin/python")
+	      (let ((sh-str (shell-command-to-string "which python")))
+		(insert-string "#!"sh-str))
+	      ;;(insert-string "#!/usr/bin/python")
 	      )
 	  (error "I cant identify the file extension")
 	  )
@@ -34,4 +38,7 @@ and insert a shabang line"
 ;; what is shebang line already exist ??
 
 ;; if the first line is not shebang, put it to the next line, and shebang will be the first line
+
+;; (let ((sh-str (shell-command-to-string "which python")))
+;;   (message "#!%s"sh-str))
 
