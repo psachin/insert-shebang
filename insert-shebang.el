@@ -42,3 +42,25 @@ and insert a shabang line"
 ;; (let ((sh-str (shell-command-to-string "which python")))
 ;;   (message "#!%s"sh-str))
 
+(buffer-substring (point-min) (end-of-line))
+
+
+;; --------------------
+(defun testpoint()
+"check the very first line of the visiting file"
+  ;;  (point-min)
+  (let ((pnt1 (point-min)))
+    ;; (message "%d"pnt)
+    (goto-char (point-min))
+    (end-of-line)
+    (goto-char (point))
+    (let ((pnt2 (point)))
+      ;; (message "%d,%d" pnt1 pnt2)
+      (buffer-substring-no-properties pnt1 pnt2)
+      )
+    )
+  ;;(point)
+  )
+
+(testpoint)
+
