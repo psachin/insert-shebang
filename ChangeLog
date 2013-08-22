@@ -1,0 +1,8 @@
+2013-08-23  sachin  <isachin@iitb.ac.in>
+
+	* insert-shebang.el: Version: 0.9 
+
+	Basic working script. Currently supports emacs, python, bash, perl
+	and ruby file formats. User can add more file types by adding a
+	key-value pair in source code.
+

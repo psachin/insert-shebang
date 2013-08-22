@@ -1,0 +1,11 @@
+# .gitignore for insert-shebang
+
+*~
+*.log
+*.elc
+
+# tar-balls system
+*.gz
+*.tar
+*.bz2
+*.pdf
