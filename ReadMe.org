@@ -8,7 +8,7 @@
        #+END_SRC
 
 ** Install 
-*** Marmalade
+*** Marmalade, MELPA
        #+BEGIN_SRC emacs-lisp
          M-x package-install insert-shebang
        #+END_SRC

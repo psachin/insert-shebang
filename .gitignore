@@ -1,8 +1,15 @@
 # .gitignore for insert-shebang
 
-*~
+# log files
 *.log
+
+# compiled files
 *.elc
+
+# emacs backup files
+*~
+\#*
+.#*
 
 # tar-balls system
 *.gz
