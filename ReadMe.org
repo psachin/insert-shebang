@@ -1,16 +1,24 @@
-* insert-shebang.el
+* insert-shebang
   Inserts shebang line automatically
 
 ** Clone
      - Clone this repository by typing
-       : git clone https://github.com/psachin/insert-shebang.git
+       #+BEGIN_SRC bash
+         git clone https://github.com/psachin/insert-shebang.git
+       #+END_SRC
 
 ** Install 
+*** Marmalade
+       #+BEGIN_SRC emacs-lisp
+         M-x package-install insert-shebang
+       #+END_SRC
+*** Manual
      - Copy =insert-shebang.el= file to your =~/.emacs.d= directory
-       : cp insert-shebang/insert-shebang.el ~/.emacs.d/
+       #+BEGIN_SRC bash
+         cp insert-shebang/insert-shebang.el ~/.emacs.d/
+       #+END_SRC
        
      - and add following code in your =~/.emacs= file
-
       #+BEGIN_SRC emacs-lisp
         (load "~/.emacs.d/insert-shebang.el")
       #+END_SRC
