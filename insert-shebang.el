@@ -1,4 +1,4 @@
-;;; insert-shebang.el --- Inserts shebang line automatically -*- lexical-binding: t; -*-
+;;; insert-shebang.el --- Inserts shebang line automatically
 
 ;; Copyright (C) 2013  Sachin Patil
 
@@ -6,7 +6,6 @@
 ;; URL: http://github.com/psachin/insert-shebang
 ;; Keywords: tools, convenience
 ;; Version: 0.9.1
-;; Package-Requires: None
 
 ;; This file is NOT a part of GNU Emacs.
 
@@ -17,26 +16,31 @@
 ;;; Commentary:
 ;; Inserts shebang line automatically
 
-;;; Install
-;; (load "~/.emacs.d/insert-shebang.el")
+;; Install
+;;
+;; Unless installed from a package, add the directory containing
+;; this file to `load-path', and then:
+;; (require 'insert-shebang)
+;;
+;; Then enable it globally using:
+;;
+;; (add-hook 'find-file-hook 'insert-shebang)
 
 ;;; Code:
 
 (defgroup insert-shebang nil
   "Inserts shebang line automatically"
   :group 'extensions
-  :link '(url-link :tag "Github" "https://github.com/psachin/insert-shebang")
-  )
+  :link '(url-link :tag "Github" "https://github.com/psachin/insert-shebang"))
 
 (defcustom insert-shebang-flag nil
   "*If non-nil, add the root directory to the load path."
   :type 'boolean
-  :group 'example)
+  :group 'insert-shebang)
 
-(defun get-extension-and-insert(filename)
+(defun get-extension-and-insert (filename)
   "Get extension from FILENAME and insert shebang.
 FILENAME is a buffer name from which the extension in extracted."
-
   (interactive "*")
   (let (myInterpreter val)
      
@@ -87,18 +91,15 @@ FILENAME is a buffer name from which the extension in extracted."
 		  )))))
       ;; if key don't exists
       (progn
-	(message "Can't guess file type"))
-      )))
+	(message "Can't guess file type")))))
 
-(defun insert-shebang()
+;;;###autoload
+(defun insert-shebang ()
   "Calls get-get-extension-and-insert with argument as
 buffer-name"
   (interactive "*")
   (get-extension-and-insert(buffer-name)))
 
-;; create hook
-(add-hook 'find-file-hook 'insert-shebang)
-;; (remove-hook 'find-file-hook 'insert-shebang)
 
 (provide 'insert-shebang)
 ;;; insert-shebang.el ends here
