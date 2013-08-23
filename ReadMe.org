@@ -13,18 +13,24 @@
          M-x package-install insert-shebang
        #+END_SRC
 *** Manual
-     - Copy =insert-shebang.el= file to your =~/.emacs.d= directory
-       #+BEGIN_SRC bash
-         cp insert-shebang/insert-shebang.el ~/.emacs.d/
+     - Add the directory containing =insert-shebang.el= file to =load-path= in your
+       =~/.emacs= file. For example:
+       #+BEGIN_SRC emacs-lisp
+         (add-to-list 'load-path "~/insert-shebang/")
+       #+END_SRC
+
+     - To load a package, add:
+       #+BEGIN_SRC emacs-lisp
+         (require 'insert-shebang)
        #+END_SRC
        
-     - and add following code in your =~/.emacs= file
+     - To enable it globally, add:
       #+BEGIN_SRC emacs-lisp
-        (load "~/.emacs.d/insert-shebang.el")
+        (add-hook 'find-file-hook 'insert-shebang)
       #+END_SRC
-
+       
 ** Usage
-   - Adds shebang line for every new file created(bash, python, perl, ruby and emacs)
+   - Adds shebang line for every new file created(Bash, Python, Perl, Ruby and Emacs)
    - Prompts user if shebang line is missing for already created file
 
 ** License
