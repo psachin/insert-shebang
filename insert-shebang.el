@@ -56,23 +56,17 @@ FILENAME is a buffer name from which the extension in extracted."
 	  (setq val (cdr (assoc file-extn file-types)))
 	  ;; if buffer is new
 	  (if (= (point-min) (point-max))
-	      (with-current-buffer (buffer-name)
-		(goto-char (point-min))
-		(insert (format "#!%s %s" (executable-find "env") val))
-		(newline))
+	      (insert-in-current-buffer val)
 	    ;; if buffer has something, then
 	    (save-excursion
 	      (goto-char (point-min))
 	      ;; search for shebang pattern
 	      (if (integerp (re-search-forward "^#![ ]?\\([a-zA-Z_./]+\\)" 50 t))
-		  (message "File already have %s shebang line" val)
+		  (message "This %s file already has shebang line" val)
 		;; prompt user
 		(if (y-or-n-p "File do not have shebang line, do you want to insert it now? ")
 		    (progn
-		      (with-current-buffer (buffer-name)
-			(goto-char (point-min))
-			(insert (format "#!%s %s" (executable-find "env") val))
-			(newline))
+		      (insert-in-current-buffer val)
 		      (message "Shebang inserted"))
 		  (progn
 		    (message "Leaving file as it is"))
@@ -81,6 +75,15 @@ FILENAME is a buffer name from which the extension in extracted."
       (progn
 	(message "Can't guess file type. Type: M-x customize-group RET insert-shebang"))))
 
+(defun insert-in-current-buffer(val)
+  "Insert shebang in current buffer"
+  (with-current-buffer (buffer-name)
+    (goto-char (point-min))
+    (insert (format "#!%s %s" (executable-find "env") val))
+    (newline)
+    (previous-line)
+    (end-of-line)))
+
 ;;;###autoload
 (defun insert-shebang ()
   "Calls get-get-extension-and-insert with argument as
@@ -88,7 +91,5 @@ buffer-name"
   (interactive "*")
   (get-extension-and-insert(buffer-name)))
 
-
 (provide 'insert-shebang)
 ;;; insert-shebang.el ends here
-
