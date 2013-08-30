@@ -16,7 +16,7 @@
      - Add the directory containing =insert-shebang.el= file to =load-path= in your
        =~/.emacs= file. For example:
        #+BEGIN_SRC emacs-lisp
-         (add-to-list 'load-path "~/insert-shebang/")
+         (add-to-list 'load-path "/path/to/insert-shebang/")
        #+END_SRC
 
      - To load a package, add:
@@ -29,8 +29,11 @@
         (add-hook 'find-file-hook 'insert-shebang)
       #+END_SRC
        
+     - Optionally, run =make= to byte-compile the file
+       
 ** Usage
    - Adds shebang line for every new file created(Bash, Python, Perl, Ruby and Emacs)
+   - Customize using =M-x customize-group RET insert-shebang RET=
    - Prompts user if shebang line is missing for already created file
 
 ** License
