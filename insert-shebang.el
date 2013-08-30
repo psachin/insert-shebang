@@ -52,6 +52,8 @@ List of file extensions to be ignored by default."
   "Get extension from FILENAME and insert shebang.
 FILENAME is a buffer name from which the extension in extracted."
   (interactive "*")
+  (let (file-extn
+	val)
   ;; strip filename extension
   (setq file-extn (file-name-extension filename))
   ;; check if this extension is ignored
@@ -84,7 +86,7 @@ FILENAME is a buffer name from which the extension in extracted."
 		    )))))
 	;; if key don't exists
 	(progn
-	  (message "Can't guess file type. Type: 'M-x customize-group RET insert-shebang' to customize"))))))
+	  (message "Can't guess file type. Type: 'M-x customize-group RET insert-shebang' to customize")))))))
 
 (defun insert-in-current-buffer(val)
   "Insert shebang in current buffer"
@@ -92,7 +94,7 @@ FILENAME is a buffer name from which the extension in extracted."
     (goto-char (point-min))
     (insert (format "#!%s %s" (executable-find "env") val))
     (newline)
-    (previous-line)
+    (goto-char (point-min))
     (end-of-line)))
 
 ;;;###autoload
