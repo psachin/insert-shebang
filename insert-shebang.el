@@ -48,6 +48,23 @@ List of file extensions to be ignored by default."
   :type '(repeat (string :tag "extn"))
   :group 'insert-shebang)
 
+(defcustom custom-headers nil
+  "Put your custom header for other file type here. For example
+'#include <stdio.h>' for c files etc.
+Example:
+
+File type: c
+Header: #include <stdio.h>
+
+File type: f90
+Header: program
+
+File type: f95
+Header: program
+"
+  :type '(alist :key-type (string :tag "Extension") :value-type (string :tag "Header"))
+  :group 'insert-shebang)
+
 (defun get-extension-and-insert (filename)
   "Get extension from FILENAME and insert shebang.
 FILENAME is a buffer name from which the extension in extracted."
@@ -61,7 +78,12 @@ FILENAME is a buffer name from which the extension in extracted."
       (progn (message "Extension ignored"))
     ;; if not, check in extension list
     (progn
-      ;; get value against the key
+      (if (car (assoc file-extn custom-headers))
+	  (progn ;; insert custom header
+	    (setq val (cdr (assoc file-extn custom-headers)))
+	    (insert val))
+	(progn
+	;; get value against the key
       (if (car (assoc file-extn file-types))
 	  ;; if key exists in hashtable
 	  (progn
@@ -86,7 +108,7 @@ FILENAME is a buffer name from which the extension in extracted."
 		    )))))
 	;; if key don't exists
 	(progn
-	  (message "Can't guess file type. Type: 'M-x customize-group RET insert-shebang' to customize")))))))
+	  (message "Can't guess file type. Type: 'M-x customize-group RET insert-shebang' to customize")))))))))
 
 (defun insert-in-current-buffer(val)
   "Insert shebang in current buffer"
