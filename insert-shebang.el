@@ -49,8 +49,8 @@ List of file extensions to be ignored by default."
   :group 'insert-shebang)
 
 (defcustom custom-headers nil
-  "Put your custom header for other file type here. For example
-'#include <stdio.h>' for c files etc.
+  "Put your custom headers for other file types here. For example
+'#include <stdio.h>' for c file etc.
 Example:
 
 File type: c
@@ -81,7 +81,11 @@ FILENAME is a buffer name from which the extension in extracted."
       (if (car (assoc file-extn custom-headers))
 	  (progn ;; insert custom header
 	    (setq val (cdr (assoc file-extn custom-headers)))
-	    (insert val))
+	    (if (= (point-min) (point-max))
+		;; insert custom-header at (point-min)
+		(insert-custom-header val)
+	      (progn
+		(scan-first-line val))))
 	(progn
 	;; get value against the key
       (if (car (assoc file-extn file-types))
@@ -104,8 +108,7 @@ FILENAME is a buffer name from which the extension in extracted."
 			(insert-in-current-buffer val)
 			(message "Shebang inserted"))
 		    (progn
-		      (message "Leaving file as it is"))
-		    )))))
+		      (message "Leaving file as it is")))))))
 	;; if key don't exists
 	(progn
 	  (message "Can't guess file type. Type: 'M-x customize-group RET insert-shebang' to customize")))))))))
@@ -119,6 +122,33 @@ FILENAME is a buffer name from which the extension in extracted."
     (goto-char (point-min))
     (end-of-line)))
 
+(defun insert-custom-header (val)
+  "Insert custom header"
+  (interactive)
+  (with-current-buffer (buffer-name)
+    (goto-char (point-min))
+    (insert val)
+    (newline)
+    (goto-char (point-min))
+    (end-of-line)))
+
+(defun scan-first-line (val)
+  "Scan very first line of the file and look if it has matching
+header"
+  (interactive)
+    (save-excursion
+      (goto-char (point-min))
+      ;; search for shebang pattern
+      (if (integerp (re-search-forward (format "^%s" val) 50 t))
+	  (message "File already has header")
+	;; prompt user
+	(if (y-or-n-p "File do not have header, do you want to insert it now? ")
+	  (progn
+	    (goto-char (point-min))
+	    (insert-custom-header val))
+	  (progn
+	    (message "Leaving file as it is"))))))
+
 ;;;###autoload
 (defun insert-shebang ()
   "Calls get-get-extension-and-insert with argument as
@@ -128,3 +158,4 @@ buffer-name"
 
 (provide 'insert-shebang)
 ;;; insert-shebang.el ends here
+
