@@ -65,6 +65,14 @@ Header: program
   :type '(alist :key-type (string :tag "Extension") :value-type (string :tag "Header"))
   :group 'insert-shebang)
 
+(defcustom header-scan-limit 6
+"Define how much initial characters to scan from starting for
+custom headers. This is to avoid differentiating header `#include
+<stdio.h>` with `#include <linux/modules.h>` or `#include
+<strings.h>`."
+  :type '(integer :tag "Limit")
+  :group 'insert-shebang)
+
 (defun get-extension-and-insert (filename)
   "Get extension from FILENAME and insert shebang.
 FILENAME is a buffer name from which the extension in extracted."
@@ -139,7 +147,7 @@ header"
     (save-excursion
       (goto-char (point-min))
       ;; search for shebang pattern
-      (if (integerp (re-search-forward (format "^%s" val) 50 t))
+      (if (integerp (re-search-forward (format "^%s" (substring val 0 header-scan-limit)) 50 t))
 	  (message "File already has header")
 	;; prompt user
 	(if (y-or-n-p "File do not have header, do you want to insert it now? ")
