@@ -11,7 +11,7 @@
 
 ;; insert-shebang is free software distributed under the terms of the
 ;; GNU General Public License, version 3. For details, see the file
-;; COPYING. 
+;; COPYING.
 
 ;;; Commentary:
 ;; Inserts shebang line automatically
@@ -33,7 +33,7 @@
 ;;; Code:
 
 (defgroup insert-shebang nil
-  "Inserts shebang line automatically"
+  "Inserts shebang line automatically."
   :group 'extensions
   :link '(url-link :tag "Github" "https://github.com/psachin/insert-shebang"))
 
@@ -53,8 +53,9 @@ List of file extensions to be ignored by default."
   :group 'insert-shebang)
 
 (defcustom custom-headers nil
-  "Put your custom headers for other file types here. For example
-'#include <stdio.h>' for c file etc.
+  "Put your custom headers for other file types here.
+For example '#include <stdio.h>' for c file etc.
+
 Example:
 
 File type: c
@@ -64,16 +65,14 @@ File type: f90
 Header: program
 
 File type: f95
-Header: program
-"
+Header: program"
   :type '(alist :key-type (string :tag "Extension") :value-type (string :tag "Header"))
   :group 'insert-shebang)
 
 (defcustom header-scan-limit 6
-"Define how much initial characters to scan from starting for
-custom headers. This is to avoid differentiating header `#include
-<stdio.h>` with `#include <linux/modules.h>` or `#include
-<strings.h>`."
+"Define how much initial characters to scan from starting for custom headers.
+This is to avoid differentiating header `#include <stdio.h>` with
+`#include <linux/modules.h>` or `#include <strings.h>`."
   :type '(integer :tag "Limit")
   :group 'insert-shebang)
 
@@ -115,8 +114,9 @@ FILENAME is a buffer name from which the extension in extracted."
 	(progn
 	  (message "Can't guess file type. Type: 'M-x customize-group RET insert-shebang' to customize")))))))))
 
-(defun insert-shebang-eval(val)
-  "Insert shebang with prefix 'eval' string in current buffer"
+(defun insert-shebang-eval (val)
+  "Insert shebang with prefix 'eval' string in current buffer.
+With VAL as an argument."
   (with-current-buffer (buffer-name)
     (goto-char (point-min))
     (insert (format "#!%s %s" (executable-find "env") val))
@@ -125,8 +125,8 @@ FILENAME is a buffer name from which the extension in extracted."
     (end-of-line)))
 
 (defun scan-first-line-eval (val)
-  "Scan very first line of the file and look if it has matching
-shebang-line"
+  "Scan very first line of the file.
+With VAL as an argument and look if it has matching shebang-line."
   (interactive)
   (save-excursion
     (goto-char (point-min))
@@ -141,7 +141,8 @@ shebang-line"
 	  (message "Leaving file as it is"))))))
 
 (defun insert-custom-header (val)
-  "Insert custom header"
+  "Insert custom header.
+With VAL as an argument."
   (interactive)
   (with-current-buffer (buffer-name)
     (goto-char (point-min))
@@ -151,8 +152,8 @@ shebang-line"
     (end-of-line)))
 
 (defun scan-first-line (val)
-  "Scan very first line of the file and look if it has matching
-header"
+  "Scan very first line of the file and look if it has matching header.
+With VAL as an argument."
   (interactive)
     (save-excursion
       (goto-char (point-min))
@@ -169,8 +170,8 @@ header"
 
 ;;;###autoload
 (defun insert-shebang ()
-  "Calls `get-extension-and-insert` with argument as
-buffer-name"
+  "Call `get-extension-and-insert`.
+With argument as `buffer-name'."
   (interactive "*")
   (get-extension-and-insert(buffer-name)))
 
