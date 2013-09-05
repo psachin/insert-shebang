@@ -5,7 +5,7 @@
 ;; Author: Sachin Patil <isachin@iitb.ac.in>
 ;; URL: http://github.com/psachin/insert-shebang
 ;; Keywords: tools, convenience
-;; Version: 0.9.1
+;; Version: 0.9.2
 
 ;; This file is NOT a part of GNU Emacs.
 
@@ -15,6 +15,7 @@
 
 ;;; Commentary:
 ;; Inserts shebang line automatically
+;; URL: http://github.com/psachin/insert-shebang
 
 ;; Install
 ;;
@@ -25,6 +26,9 @@
 ;; Then enable it globally using:
 ;;
 ;; (add-hook 'find-file-hook 'insert-shebang)
+
+;; Customize
+;; M-x customize-group RET insert-shebang RET
 
 ;;; Code:
 
@@ -97,38 +101,44 @@ FILENAME is a buffer name from which the extension in extracted."
 	(progn
 	;; get value against the key
       (if (car (assoc file-extn file-types))
-	  ;; if key exists in hashtable
+	  ;; if key exists in list 'file-types'
 	  (progn
 	    ;; set variable val to value of key
 	    (setq val (cdr (assoc file-extn file-types)))
 	    ;; if buffer is new
 	    (if (= (point-min) (point-max))
-		(insert-in-current-buffer val)
+		(insert-shebang-eval val)
 	      ;; if buffer has something, then
-	      (save-excursion
-		(goto-char (point-min))
-		;; search for shebang pattern
-		(if (integerp (re-search-forward "^#![ ]?\\([a-zA-Z_./]+\\)" 50 t))
-		    (message "This %s file already has shebang line" val)
-		  ;; prompt user
-		  (if (y-or-n-p "File do not have shebang line, do you want to insert it now? ")
-		      (progn
-			(insert-in-current-buffer val)
-			(message "Shebang inserted"))
-		    (progn
-		      (message "Leaving file as it is")))))))
+	      (progn
+		(scan-first-line-eval val))))
 	;; if key don't exists
 	(progn
 	  (message "Can't guess file type. Type: 'M-x customize-group RET insert-shebang' to customize")))))))))
 
-(defun insert-in-current-buffer(val)
-  "Insert shebang in current buffer"
+(defun insert-shebang-eval(val)
+  "Insert shebang with prefix 'eval' string in current buffer"
   (with-current-buffer (buffer-name)
     (goto-char (point-min))
     (insert (format "#!%s %s" (executable-find "env") val))
     (newline)
     (goto-char (point-min))
     (end-of-line)))
+
+(defun scan-first-line-eval (val)
+  "Scan very first line of the file and look if it has matching
+shebang-line"
+  (interactive)
+  (save-excursion
+    (goto-char (point-min))
+    ;; search for shebang pattern
+    (if (integerp (re-search-forward "^#![ ]?\\([a-zA-Z_./]+\\)" 50 t))
+	(message "This %s file already has shebang line" val)
+      ;; prompt user
+      (if (y-or-n-p "File do not have shebang line, do you want to insert it now? ")
+	  (progn
+	    (insert-shebang-eval val))
+	(progn
+	  (message "Leaving file as it is"))))))
 
 (defun insert-custom-header (val)
   "Insert custom header"
@@ -159,7 +169,7 @@ header"
 
 ;;;###autoload
 (defun insert-shebang ()
-  "Calls get-get-extension-and-insert with argument as
+  "Calls `get-extension-and-insert` with argument as
 buffer-name"
   (interactive "*")
   (get-extension-and-insert(buffer-name)))
