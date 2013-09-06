@@ -89,8 +89,7 @@ This is to avoid differentiating header `#include <stdio.h>` with
   "Get extension from FILENAME and insert shebang.
 FILENAME is a buffer name from which the extension in extracted."
   (interactive "*")
-  (let (file-extn
-	val)
+  (let ((file-extn (file-name-extension filename)))
   ;; strip filename extension
   (setq file-extn (file-name-extension filename))
   ;; check if this extension is ignored
@@ -100,25 +99,25 @@ FILENAME is a buffer name from which the extension in extracted."
     (progn
       (if (car (assoc file-extn insert-shebang-custom-headers))
 	  (progn ;; insert custom header
-	    (setq val (cdr (assoc file-extn insert-shebang-custom-headers)))
+	    (let ((val (cdr (assoc file-extn insert-shebang-custom-headers))))
 	    (if (= (point-min) (point-max))
 		;; insert custom-header at (point-min)
 		(insert-shebang-custom-header val)
 	      (progn
-		(insert-shebang-scan-first-line-custom-header val))))
+		(insert-shebang-scan-first-line-custom-header val)))))
 	(progn
 	;; get value against the key
       (if (car (assoc file-extn insert-shebang-file-types))
 	  ;; if key exists in list 'insert-shebang-file-types'
 	  (progn
 	    ;; set variable val to value of key
-	    (setq val (cdr (assoc file-extn insert-shebang-file-types)))
+	    (let ((val (cdr (assoc file-extn insert-shebang-file-types))))
 	    ;; if buffer is new
 	    (if (= (point-min) (point-max))
 		(insert-shebang-eval val)
 	      ;; if buffer has something, then
 	      (progn
-		(insert-shebang-scan-first-line-eval val))))
+		(insert-shebang-scan-first-line-eval val)))))
 	;; if key don't exists
 	(progn
 	  (message "Can't guess file type. Type: 'M-x customize-group RET \
