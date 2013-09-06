@@ -1,5 +1,5 @@
 ** TODO
-   - TODO remove -pkg.el file
+   - DONE remove -pkg.el file
    - DONE defcustom for `eval`
    - DONE avoid `let` and then `setq` together
    - TODO test cases
