@@ -37,22 +37,23 @@
   :group 'extensions
   :link '(url-link :tag "Github" "https://github.com/psachin/insert-shebang"))
 
-(defcustom file-types
+(defcustom insert-shebang-file-types
   '(("py" . "python")
     ("sh" . "bash")
     ("pl" . "perl"))
   "*If nil, add all your file extensions and file types here."
-  :type '(alist :key-type (string :tag "Extension") :value-type (string :tag "Type"))
+  :type '(alist :key-type (string :tag "Extension")
+		:value-type (string :tag "Type"))
   :group 'insert-shebang)
 
-(defcustom ignore-extensions
+(defcustom insert-shebang-ignore-extensions
   '("txt" "org")
   "*Add extensions you want to ignore.
 List of file extensions to be ignored by default."
   :type '(repeat (string :tag "extn"))
   :group 'insert-shebang)
 
-(defcustom custom-headers nil
+(defcustom insert-shebang-custom-headers nil
   "Put your custom headers for other file types here.
 For example '#include <stdio.h>' for c file etc.
 
@@ -66,17 +67,18 @@ Header: program
 
 File type: f95
 Header: program"
-  :type '(alist :key-type (string :tag "Extension") :value-type (string :tag "Header"))
+  :type '(alist :key-type (string :tag "Extension")
+		:value-type (string :tag "Header"))
   :group 'insert-shebang)
 
-(defcustom header-scan-limit 6
+(defcustom insert-shebang-header-scan-limit 6
 "Define how much initial characters to scan from starting for custom headers.
 This is to avoid differentiating header `#include <stdio.h>` with
 `#include <linux/modules.h>` or `#include <strings.h>`."
   :type '(integer :tag "Limit")
   :group 'insert-shebang)
 
-(defun get-extension-and-insert (filename)
+(defun insert-shebang-get-extension-and-insert (filename)
   "Get extension from FILENAME and insert shebang.
 FILENAME is a buffer name from which the extension in extracted."
   (interactive "*")
@@ -85,34 +87,35 @@ FILENAME is a buffer name from which the extension in extracted."
   ;; strip filename extension
   (setq file-extn (file-name-extension filename))
   ;; check if this extension is ignored
-  (if (car (member file-extn ignore-extensions))
+  (if (car (member file-extn insert-shebang-ignore-extensions))
       (progn (message "Extension ignored"))
     ;; if not, check in extension list
     (progn
-      (if (car (assoc file-extn custom-headers))
+      (if (car (assoc file-extn insert-shebang-custom-headers))
 	  (progn ;; insert custom header
-	    (setq val (cdr (assoc file-extn custom-headers)))
+	    (setq val (cdr (assoc file-extn insert-shebang-custom-headers)))
 	    (if (= (point-min) (point-max))
 		;; insert custom-header at (point-min)
-		(insert-custom-header val)
+		(insert-shebang-custom-header val)
 	      (progn
-		(scan-first-line val))))
+		(insert-shebang-scan-first-line-custom-header val))))
 	(progn
 	;; get value against the key
-      (if (car (assoc file-extn file-types))
-	  ;; if key exists in list 'file-types'
+      (if (car (assoc file-extn insert-shebang-file-types))
+	  ;; if key exists in list 'insert-shebang-file-types'
 	  (progn
 	    ;; set variable val to value of key
-	    (setq val (cdr (assoc file-extn file-types)))
+	    (setq val (cdr (assoc file-extn insert-shebang-file-types)))
 	    ;; if buffer is new
 	    (if (= (point-min) (point-max))
 		(insert-shebang-eval val)
 	      ;; if buffer has something, then
 	      (progn
-		(scan-first-line-eval val))))
+		(insert-shebang-scan-first-line-eval val))))
 	;; if key don't exists
 	(progn
-	  (message "Can't guess file type. Type: 'M-x customize-group RET insert-shebang' to customize")))))))))
+	  (message "Can't guess file type. Type: 'M-x customize-group RET \
+insert-shebang' to customize")))))))))
 
 (defun insert-shebang-eval (val)
   "Insert shebang with prefix 'eval' string in current buffer.
@@ -124,23 +127,7 @@ With VAL as an argument."
     (goto-char (point-min))
     (end-of-line)))
 
-(defun scan-first-line-eval (val)
-  "Scan very first line of the file.
-With VAL as an argument and look if it has matching shebang-line."
-  (interactive)
-  (save-excursion
-    (goto-char (point-min))
-    ;; search for shebang pattern
-    (if (integerp (re-search-forward "^#![ ]?\\([a-zA-Z_./]+\\)" 50 t))
-	(message "This %s file already has shebang line" val)
-      ;; prompt user
-      (if (y-or-n-p "File do not have shebang line, do you want to insert it now? ")
-	  (progn
-	    (insert-shebang-eval val))
-	(progn
-	  (message "Leaving file as it is"))))))
-
-(defun insert-custom-header (val)
+(defun insert-shebang-custom-header (val)
   "Insert custom header.
 With VAL as an argument."
   (interactive)
@@ -151,29 +138,49 @@ With VAL as an argument."
     (goto-char (point-min))
     (end-of-line)))
 
-(defun scan-first-line (val)
+(defun insert-shebang-scan-first-line-eval (val)
+  "Scan very first line of the file.
+With VAL as an argument and look if it has matching shebang-line."
+  (interactive)
+  (save-excursion
+    (goto-char (point-min))
+    ;; search for shebang pattern
+    (if (integerp (re-search-forward "^#![ ]?\\([a-zA-Z_./]+\\)" 50 t))
+	(message "This %s file already has shebang line" val)
+      ;; prompt user
+      (if (y-or-n-p "File do not have shebang line, \
+do you want to insert it now? ")
+	  (progn
+	    (insert-shebang-eval val))
+	(progn
+	  (message "Leaving file as it is"))))))
+
+(defun insert-shebang-scan-first-line-custom-header (val)
   "Scan very first line of the file and look if it has matching header.
 With VAL as an argument."
   (interactive)
     (save-excursion
       (goto-char (point-min))
       ;; search for shebang pattern
-      (if (integerp (re-search-forward (format "^%s" (substring val 0 header-scan-limit)) 50 t))
+      (if (integerp (re-search-forward
+		     (format "^%s"
+			     (substring val 0 insert-shebang-header-scan-limit))
+		     50 t))
 	  (message "File already has header")
 	;; prompt user
 	(if (y-or-n-p "File do not have header, do you want to insert it now? ")
 	  (progn
 	    (goto-char (point-min))
-	    (insert-custom-header val))
+	    (insert-shebang-custom-header val))
 	  (progn
 	    (message "Leaving file as it is"))))))
 
 ;;;###autoload
 (defun insert-shebang ()
-  "Call `get-extension-and-insert`.
+  "Call `insert-shebang-get-extension-and-insert`.
 With argument as `buffer-name'."
   (interactive "*")
-  (get-extension-and-insert(buffer-name)))
+  (insert-shebang-get-extension-and-insert(buffer-name)))
 
 (provide 'insert-shebang)
 ;;; insert-shebang.el ends here
