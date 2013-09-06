@@ -37,6 +37,13 @@
   :group 'extensions
   :link '(url-link :tag "Github" "https://github.com/psachin/insert-shebang"))
 
+(defcustom insert-shebang-env-path "/usr/bin/env"
+  "Full path to `env' binary.
+You can find the path to `env' by typing `which env' in the
+terminal."
+  :type '(string)
+  :group 'insert-shebang)
+
 (defcustom insert-shebang-file-types
   '(("py" . "python")
     ("sh" . "bash")
@@ -122,7 +129,7 @@ insert-shebang' to customize")))))))))
 With VAL as an argument."
   (with-current-buffer (buffer-name)
     (goto-char (point-min))
-    (insert (format "#!%s %s" (executable-find "env") val))
+    (insert (format "#!%s %s" insert-shebang-env-path val))
     (newline)
     (goto-char (point-min))
     (end-of-line)))
