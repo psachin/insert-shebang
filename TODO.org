@@ -1,2 +1,5 @@
 ** TODO
-   - No TODO's ;)
+   - TODO remove -pkg.el file
+   - TODO defcustom for `eval`
+   - TODO avoid `let` and then `setq` together
+   - TODO test cases
