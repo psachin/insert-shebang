@@ -90,8 +90,6 @@ This is to avoid differentiating header `#include <stdio.h>` with
 FILENAME is a buffer name from which the extension in extracted."
   (interactive "*")
   (let ((file-extn (file-name-extension filename)))
-  ;; strip filename extension
-  (setq file-extn (file-name-extension filename))
   ;; check if this extension is ignored
   (if (car (member file-extn insert-shebang-ignore-extensions))
       (progn (message "Extension ignored"))
