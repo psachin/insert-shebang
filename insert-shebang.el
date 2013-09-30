@@ -88,7 +88,6 @@ This is to avoid differentiating header `#include <stdio.h>` with
 (defun insert-shebang-get-extension-and-insert (filename)
   "Get extension from FILENAME and insert shebang.
 FILENAME is a buffer name from which the extension in extracted."
-  (interactive "*")
   (if (file-name-extension filename)
   (let ((file-extn (file-name-extension filename)))
   ;; check if this extension is ignored
@@ -135,7 +134,6 @@ With VAL as an argument."
 (defun insert-shebang-custom-header (val)
   "Insert custom header.
 With VAL as an argument."
-  (interactive)
   (with-current-buffer (buffer-name)
     (goto-char (point-min))
     (insert val)
@@ -146,7 +144,6 @@ With VAL as an argument."
 (defun insert-shebang-scan-first-line-eval (val)
   "Scan very first line of the file.
 With VAL as an argument and look if it has matching shebang-line."
-  (interactive)
   (save-excursion
     (goto-char (point-min))
     ;; search for shebang pattern
@@ -163,7 +160,6 @@ do you want to insert it now? ")
 (defun insert-shebang-scan-first-line-custom-header (val)
   "Scan very first line of the file and look if it has matching header.
 With VAL as an argument."
-  (interactive)
     (save-excursion
       (goto-char (point-min))
       ;; search for shebang pattern
