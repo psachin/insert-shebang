@@ -178,8 +178,9 @@ With VAL as an argument."
 
 ;;;###autoload
 (defun insert-shebang ()
-  "Call `insert-shebang-get-extension-and-insert`.
-With argument as `buffer-name'."
+  "Inserts shebang line automatically.
+Calls fuction `insert-shebang-get-extension-and-insert`. With argument as
+`buffer-name'."
   (interactive "*")
   (insert-shebang-get-extension-and-insert(buffer-name)))
 
