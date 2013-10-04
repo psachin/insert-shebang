@@ -4,7 +4,7 @@
 
 ;; Author: Sachin Patil <isachin@iitb.ac.in>
 ;; URL: http://github.com/psachin/insert-shebang
-;; Keywords: tools, convenience
+;; Keywords: shebang, tool, convenience
 ;; Version: 0.9.2
 
 ;; This file is NOT a part of GNU Emacs.
@@ -85,6 +85,12 @@ This is to avoid differentiating header `#include <stdio.h>` with
   :type '(integer :tag "Limit")
   :group 'insert-shebang)
 
+(defcustom insert-shebang-track-ignored-filename "~/.insert-shebang.log"
+  "Filepath where list of ignored files are stored.
+Set to `nil' if you do not want to keep log of ignored files."
+  :type '(string)
+  :group 'insert-shebang)
+
 (defun insert-shebang-get-extension-and-insert (filename)
   "Get extension from FILENAME and insert shebang.
 FILENAME is a buffer name from which the extension in extracted."
@@ -155,7 +161,7 @@ do you want to insert it now? ")
 	  (progn
 	    (insert-shebang-eval val))
 	(progn
-	  (message "Leaving file as it is"))))))
+	  (insert-shebang-log-ignored-files (buffer-name)))))))
 
 (defun insert-shebang-scan-first-line-custom-header (val)
   "Scan very first line of the file and look if it has matching header.
@@ -170,19 +176,83 @@ With VAL as an argument."
 	  (message "File already has header")
 	;; prompt user
 	(if (y-or-n-p "File do not have header, do you want to insert it now? ")
+	    (progn
+	      (goto-char (point-min))
+	      (insert-shebang-custom-header val))
 	  (progn
-	    (goto-char (point-min))
-	    (insert-shebang-custom-header val))
-	  (progn
-	    (message "Leaving file as it is"))))))
+	    (insert-shebang-log-ignored-files (buffer-name)))))))
+
+(defun insert-shebang-read-log-file (log-file-path)
+  "Return a list of ignored files.
+LOG-FILE-PATH is set in `insert-shebang-track-ignored-filename'"
+  (with-temp-buffer
+    (insert-file-contents log-file-path)
+    ;; every new line is treated as an element.
+    (split-string (buffer-string) "\n" t)))
+
+(defun insert-shebang-write-log-file (log-file-path log-file-list)
+  "Write list of files to be ignored to log file.
+LOG-FILE-PATH is set in `insert-shebang-track-ignored-filename'
+and LOG-FILE-LIST is a list of ignored files with fullpath."
+  (with-temp-buffer
+    ;; every element on a new line.
+    (insert (mapconcat 'identity log-file-list "\n"))
+    (when (file-writable-p log-file-path)
+      (write-region (point-min)
+		    (point-max)
+		    log-file-path))))
+
+(defun insert-shebang-log-ignored-files (filename)
+  "Keep log of ignored files.
+Ignore them on next visit.
+FILENAME is `buffer-name'."
+  (interactive)
+  ;; if `insert-shebang-track-ignored-filename' is `nil', don't track
+  ;; ignored files.
+  (if (not (equal insert-shebang-track-ignored-filename nil))
+      (progn
+	;; if file not exist, create it
+	(if (not (file-exists-p (expand-file-name
+				 insert-shebang-track-ignored-filename)))
+	    (write-region 1 1 (expand-file-name
+			       insert-shebang-track-ignored-filename) t))
+	;; set variables
+	(let* ((log-file-path (expand-file-name
+			       insert-shebang-track-ignored-filename))
+	       (log-file-list (insert-shebang-read-log-file log-file-path)))
+	  ;; add new 'ignored' file to the list
+	  (add-to-list 'log-file-list (expand-file-name filename))
+	  ;; Updated list in the log-file
+	  ;; (message "%s" log-file-list)
+	  (insert-shebang-write-log-file log-file-path log-file-list)))))
 
 ;;;###autoload
 (defun insert-shebang ()
   "Inserts shebang line automatically.
-Calls fuction `insert-shebang-get-extension-and-insert`. With argument as
+Calls function `insert-shebang-get-extension-and-insert'. With argument as
 `buffer-name'."
   (interactive "*")
-  (insert-shebang-get-extension-and-insert(buffer-name)))
+  ;; if `insert-shebang-track-ignored-filename' is `nil', don't track
+  ;; ignored files.
+  (if (not (equal insert-shebang-track-ignored-filename nil))
+      (progn
+	;; if file not exist, create it
+	(if (not (file-exists-p (expand-file-name
+				 insert-shebang-track-ignored-filename)))
+	    (write-region 1 1 (expand-file-name
+			       insert-shebang-track-ignored-filename) t))
+	;; ignore current-buffer, if it's path exist in ignored file list.
+	(let* ((log-file-path (expand-file-name
+			       insert-shebang-track-ignored-filename))
+	       (log-file-list (insert-shebang-read-log-file log-file-path))
+	       (filename (expand-file-name (buffer-name))))
+	  (if (member filename log-file-list)
+	      ;; do nothing.
+	      (progn)
+	    ;; call `insert-shebang-get-extension-and-insert'.
+	    (progn
+	      (insert-shebang-get-extension-and-insert (buffer-name))))))
+    (insert-shebang-get-extension-and-insert (buffer-name))))
 
 (provide 'insert-shebang)
 ;;; insert-shebang.el ends here
