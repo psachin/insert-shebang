@@ -1,11 +1,18 @@
-2013-09-05  sachin  <sachin@iitb.ac.in>
+2013-10-05  sachin  <isachin@iitb.ac.in>
+
+	* insert-shebang.el (insert-shebang-log-ignored-files): New Feature.
+
+	Make log of ignored file in "~/.insert-shebang.log"(optional).
+	Ignore them at next visit.
+
+2013-09-05  sachin  <isachin@iitb.ac.in>
 
 	* insert-shebang.el: Version: 0.9.2
 
 	Feature to add custom header to .c/.cpp and .f90/.f95 files.  Code
 	cleaning. Renaming function names.
 
-2013-09-24  sachin  <sachin@iitb.ac.in>
+2013-09-24  sachin  <isachin@iitb.ac.in>
 
 	* insert-shebang.el: Version: 0.9.1
 

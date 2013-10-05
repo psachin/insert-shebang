@@ -1,4 +1,4 @@
-;;; insert-shebang.el --- Inserts shebang line automatically
+;;; insert-shebang.el --- Insert shebang line automatically.
 
 ;; Copyright (C) 2013  Sachin Patil
 
@@ -9,17 +9,20 @@
 
 ;; This file is NOT a part of GNU Emacs.
 
-;; insert-shebang is free software distributed under the terms of the
-;; GNU General Public License, version 3. For details, see the file
-;; COPYING.
+;; `insert-shebang' is free software distributed under the terms of
+;; the GNU General Public License, version 3. For details, see the
+;; file COPYING.
 
 ;;; Commentary:
 ;; Inserts shebang line automatically
 ;; URL: http://github.com/psachin/insert-shebang
 
 ;; Install
-;;
-;; Unless installed from a package, add the directory containing
+
+;; Using `package'
+;; M-x package-install insert-shebang
+
+;; Unless installed from a `package', add the directory containing
 ;; this file to `load-path', and then:
 ;; (require 'insert-shebang)
 ;;
@@ -29,6 +32,8 @@
 
 ;; Customize
 ;; M-x customize-group RET insert-shebang RET
+;;
+;; See ReadMe.org for more info.
 
 ;;; Code:
 
@@ -87,7 +92,7 @@ This is to avoid differentiating header `#include <stdio.h>` with
 
 (defcustom insert-shebang-track-ignored-filename "~/.insert-shebang.log"
   "Filepath where list of ignored files are stored.
-Set to `nil' if you do not want to keep log of ignored files."
+Set to nil if you do not want to keep log of ignored files."
   :type '(string)
   :group 'insert-shebang)
 
@@ -206,7 +211,6 @@ and LOG-FILE-LIST is a list of ignored files with fullpath."
   "Keep log of ignored files.
 Ignore them on next visit.
 FILENAME is `buffer-name'."
-  (interactive)
   ;; if `insert-shebang-track-ignored-filename' is `nil', don't track
   ;; ignored files.
   (if (not (equal insert-shebang-track-ignored-filename nil))
@@ -228,8 +232,8 @@ FILENAME is `buffer-name'."
 
 ;;;###autoload
 (defun insert-shebang ()
-  "Inserts shebang line automatically.
-Calls function `insert-shebang-get-extension-and-insert'. With argument as
+  "Insert shebang line automatically.
+Calls function `insert-shebang-get-extension-and-insert'.  With argument as
 `buffer-name'."
   (interactive "*")
   ;; if `insert-shebang-track-ignored-filename' is `nil', don't track
