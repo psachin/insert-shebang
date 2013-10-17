@@ -207,6 +207,12 @@ and LOG-FILE-LIST is a list of ignored files with fullpath."
 		    (point-max)
 		    log-file-path))))
 
+(defun insert-shebang-create-log-file (logfile)
+  "Function to create log file if does not exist.
+LOGFILE name is defined in `insert-shebang-track-ignored-filename'."
+  (if (not (file-exists-p (expand-file-name logfile)))
+      (write-region 1 1 (expand-file-name logfile) t)))
+
 (defun insert-shebang-log-ignored-files (filename)
   "Keep log of ignored files.
 Ignore them on next visit.
@@ -216,10 +222,7 @@ FILENAME is `buffer-name'."
   (if (not (equal insert-shebang-track-ignored-filename nil))
       (progn
 	;; if file not exist, create it
-	(if (not (file-exists-p (expand-file-name
-				 insert-shebang-track-ignored-filename)))
-	    (write-region 1 1 (expand-file-name
-			       insert-shebang-track-ignored-filename) t))
+	(insert-shebang-create-log-file insert-shebang-track-ignored-filename)
 	;; set variables
 	(let* ((log-file-path (expand-file-name
 			       insert-shebang-track-ignored-filename))
@@ -241,10 +244,7 @@ Calls function `insert-shebang-get-extension-and-insert'.  With argument as
   (if (not (equal insert-shebang-track-ignored-filename nil))
       (progn
 	;; if file not exist, create it
-	(if (not (file-exists-p (expand-file-name
-				 insert-shebang-track-ignored-filename)))
-	    (write-region 1 1 (expand-file-name
-			       insert-shebang-track-ignored-filename) t))
+	(insert-shebang-create-log-file insert-shebang-track-ignored-filename)
 	;; ignore current-buffer, if it's path exist in ignored file list.
 	(let* ((log-file-path (expand-file-name
 			       insert-shebang-track-ignored-filename))
