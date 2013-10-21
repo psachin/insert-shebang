@@ -10,7 +10,7 @@
 ** Install 
 *** [[http://marmalade-repo.org/packages/insert-shebang][Marmalade]], [[http://melpa.milkbox.net/#/insert-shebang][MELPA]]
        #+BEGIN_SRC emacs-lisp
-         M-x package-install insert-shebang
+         M-x package-install RET insert-shebang RET 
        #+END_SRC emacs-lisp
 *** Manual
      - Add directory containing =insert-shebang.el= file to
