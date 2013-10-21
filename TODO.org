@@ -5,3 +5,4 @@
      - TODO Sanity check log file for removed/changed file path. May
        be a seperate file/lib
    - TODO test cases
+   - Ignore dirs

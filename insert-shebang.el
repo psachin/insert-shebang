@@ -55,7 +55,7 @@ terminal."
     ("pl" . "perl"))
   "*If nil, add all your file extensions and file types here."
   :type '(alist :key-type (string :tag "Extension")
-		:value-type (string :tag "Type"))
+		:value-type (string :tag "Interpreter"))
   :group 'insert-shebang)
 
 (defcustom insert-shebang-ignore-extensions
