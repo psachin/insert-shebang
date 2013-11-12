@@ -1,4 +1,4 @@
-* insert-shebang
+* insert-shebang [[https://travis-ci.org/psachin/insert-shebang.png?branch=master][https://travis-ci.org/psachin/insert-shebang.png?branch=master]]
   Insert shebang line automatically.
 
 ** Clone
