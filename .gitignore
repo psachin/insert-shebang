@@ -11,6 +11,9 @@
 \#*
 .#*
 
+# autoloads
+*-autoloads.el
+
 # tar-balls system
 *.gz
 *.tar
