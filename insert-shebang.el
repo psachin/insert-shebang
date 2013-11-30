@@ -167,7 +167,8 @@ do you want to insert it now? ")
 	  (progn
 	    (insert-shebang-eval val))
 	(progn
-	  (insert-shebang-log-ignored-files (buffer-name)))))))
+	  (insert-shebang-log-ignored-files
+	   (replace-regexp-in-string "[\<0-9\>]" "" (buffer-name))))))))
 
 (defun insert-shebang-scan-first-line-custom-header (val)
   "Scan very first line of the file and look if it has matching header.
@@ -186,7 +187,8 @@ With VAL as an argument."
 	      (goto-char (point-min))
 	      (insert-shebang-custom-header val))
 	  (progn
-	    (insert-shebang-log-ignored-files (buffer-name)))))))
+	    (insert-shebang-log-ignored-files
+	     (replace-regexp-in-string "[\<0-9\>]" "" (buffer-name))))))))
 
 (defun insert-shebang-read-log-file (log-file-path)
   "Return a list of ignored files.
