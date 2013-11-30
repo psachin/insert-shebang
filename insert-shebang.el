@@ -100,7 +100,8 @@ Set to nil if you do not want to keep log of ignored files."
   "Get extension from FILENAME and insert shebang.
 FILENAME is a buffer name from which the extension in extracted."
   (if (file-name-extension filename)
-  (let ((file-extn (file-name-extension filename)))
+  (let ((file-extn (replace-regexp-in-string "[\<0-9\>]" ""
+					     (file-name-extension filename))))
   ;; check if this extension is ignored
   (if (car (member file-extn insert-shebang-ignore-extensions))
       (progn (message "Extension ignored"))
