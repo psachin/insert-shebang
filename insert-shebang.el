@@ -98,7 +98,8 @@ Set to nil if you do not want to keep log of ignored files."
 
 (defun insert-shebang-get-extension-and-insert (filename)
   "Get extension from FILENAME and insert shebang.
-FILENAME is a buffer name from which the extension in extracted."
+FILENAME is a buffer name from which the extension is to be
+extracted."
   (if (file-name-extension filename)
   (let ((file-extn (replace-regexp-in-string "[\<0-9\>]" ""
 					     (file-name-extension filename))))
