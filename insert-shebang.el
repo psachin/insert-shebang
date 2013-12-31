@@ -253,7 +253,9 @@ Calls function `insert-shebang-get-extension-and-insert'.  With argument as
 	(let* ((log-file-path (expand-file-name
 			       insert-shebang-track-ignored-filename))
 	       (log-file-list (insert-shebang-read-log-file log-file-path))
-	       (filename (expand-file-name (buffer-name))))
+	       (filename (replace-regexp-in-string "[\<0-9\>]" ""
+						   (expand-file-name
+						    (buffer-name)))))
 	  (if (member filename log-file-list)
 	      ;; do nothing.
 	      (progn)
