@@ -237,6 +237,13 @@ FILENAME is `buffer-name'."
 	  ;; (message "%s" log-file-list)
 	  (insert-shebang-write-log-file log-file-path log-file-list)))))
 
+(defun insert-shebang-open-log-buffer ()
+  "Open log of ignored file(s) in a separate buffer for editing."
+  (interactive "*")
+  (when (file-readable-p insert-shebang-track-ignored-filename)
+    (get-buffer-window (find-file-existing
+			insert-shebang-track-ignored-filename))))
+
 ;;;###autoload
 (defun insert-shebang ()
   "Insert shebang line automatically.

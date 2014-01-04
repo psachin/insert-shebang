@@ -1,8 +1,9 @@
-** TODO
-   - DONE remove -pkg.el file
-   - DONE defcustom for `eval`
-   - DONE avoid `let` and then `setq` together
-     - TODO Sanity check log file for removed/changed file path. May
-       be a seperate file/lib
-   - TODO test cases
-   - Ignore dirs
+* List if TODO items
+** DONE remove -pkg.el file
+** DONE defcustom for `eval`
+** DONE avoid `let` and then `setq` together
+** TODO Sanity check log file for removed/changed file path. May
+   be a seperate file.
+** TODO test cases.
+** TODO Ignore entire directory.
+  
