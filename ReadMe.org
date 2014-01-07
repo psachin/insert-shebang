@@ -37,18 +37,23 @@
        M-x customize-group RET insert-shebang RET
      #+END_SRC emacs-lisp
 *** Env Path
-    - Defines path to =env=. Default is =/usr/bin/env=.
+    Defines path to =env=. Default is =/usr/bin/env=.
 *** File Types
-    - Defines file types.
+    Defines file types.
 *** Custom Headers 
-    - *insert-shebang* can be extended to insert header for C, C++ and
-      FORTRAN programs etc.
+    *insert-shebang* can be extended to insert header for C, C++ and
+    FORTRAN programs etc.
 *** Ignore Extensions 
-    - Set file types(using extensions) you want to ignore.
+    Set file types(using extensions) you want to ignore.
 *** Ignored Filename
-    - Files ignored during the prompt are stored with their full-path
-      in =~/.insert-shebang.log= file. Set to *nil* if you want to
-      disable this feature.
+    Files ignored during the prompt are stored with their full-path
+    in =~/.insert-shebang.log= file. Set to *nil* if you want to
+    disable this feature. 
+
+    You can visit this log file using 
+    #+BEGIN_SRC emacs-lisp
+      M-x insert-shebang-open-log-buffer
+    #+END_SRC emacs-lisp
 
 ** License
    - See [[https://github.com/psachin/insert-shebang/blob/master/COPYING][COPYING]]
