@@ -169,7 +169,7 @@ do you want to insert it now? ")
 	    (insert-shebang-eval val))
 	(progn
 	  (insert-shebang-log-ignored-files
-	   (replace-regexp-in-string "[\<0-9\>]" "" (buffer-name))))))))
+	   (replace-regexp-in-string "[\<0-9\>]" "" (original-buffer-name))))))))
 
 (defun insert-shebang-scan-first-line-custom-header (val)
   "Scan very first line of the file and look if it has matching header.
@@ -189,7 +189,7 @@ With VAL as an argument."
 	      (insert-shebang-custom-header val))
 	  (progn
 	    (insert-shebang-log-ignored-files
-	     (replace-regexp-in-string "[\<0-9\>]" "" (buffer-name))))))))
+	     (replace-regexp-in-string "[\<0-9\>]" "" (original-buffer-name))))))))
 
 (defun insert-shebang-read-log-file (log-file-path)
   "Return a list of ignored files.
@@ -243,6 +243,10 @@ FILENAME is `buffer-name'."
   (when (file-readable-p insert-shebang-track-ignored-filename)
     (find-file-other-window insert-shebang-track-ignored-filename)))
 
+(defun original-buffer-name ()
+  "Get un-uniquified buffer name."
+  (file-name-nondirectory (buffer-file-name)))
+
 ;;;###autoload
 (defun insert-shebang ()
   "Insert shebang line automatically.
@@ -261,15 +265,14 @@ Calls function `insert-shebang-get-extension-and-insert'.  With argument as
 	       (log-file-list (insert-shebang-read-log-file log-file-path))
 	       (filename (replace-regexp-in-string "[\<0-9\>]" ""
 						   (expand-file-name
-						    (buffer-name)))))
+						    (original-buffer-name)))))
 	  (if (member filename log-file-list)
 	      ;; do nothing.
 	      (progn)
 	    ;; call `insert-shebang-get-extension-and-insert'.
 	    (progn
-	      (insert-shebang-get-extension-and-insert (buffer-name))))))
-    (insert-shebang-get-extension-and-insert (buffer-name))))
+	      (insert-shebang-get-extension-and-insert (original-buffer-name))))))
+    (insert-shebang-get-extension-and-insert (original-buffer-name))))
 
 (provide 'insert-shebang)
 ;;; insert-shebang.el ends here
-
