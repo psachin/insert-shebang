@@ -1,6 +1,6 @@
 ;;; insert-shebang.el --- Insert shebang line automatically.
 
-;; Copyright (C) 2013  Sachin Patil
+;; Copyright (C) 2013-2014  Sachin Patil
 
 ;; Author: Sachin Patil <isachin@iitb.ac.in>
 ;; URL: http://github.com/psachin/insert-shebang
@@ -161,7 +161,7 @@ With VAL as an argument and look if it has matching shebang-line."
     (goto-char (point-min))
     ;; search for shebang pattern
     (if (ignore-errors (re-search-forward "^#![ ]?\\([a-zA-Z_./]+\\)"))
-	(message "This %s file already has shebang line" val)
+	(message "insert-shebang: File has shebang line" val)
       ;; prompt user
       (if (y-or-n-p "File do not have shebang line, \
 do you want to insert it now? ")
@@ -177,11 +177,11 @@ With VAL as an argument."
     (save-excursion
       (goto-char (point-min))
       ;; search for shebang pattern
-      (if (integerp (re-search-forward
-		     (format "^%s"
-			     (substring val 0 insert-shebang-header-scan-limit))
-		     50 t))
-	  (message "File already has header")
+      (if (ignore-errors
+	    (re-search-forward
+	     (format "^%s"
+		     (substring val 0 insert-shebang-header-scan-limit))))
+	  (message "insert-shebang: File has header")
 	;; prompt user
 	(if (y-or-n-p "File do not have header, do you want to insert it now? ")
 	    (progn
