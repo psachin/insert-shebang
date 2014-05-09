@@ -160,7 +160,7 @@ With VAL as an argument and look if it has matching shebang-line."
   (save-excursion
     (goto-char (point-min))
     ;; search for shebang pattern
-    (if (ignore-errors (re-search-forward "^#![ ]?\\([a-zA-Z_./]+\\)"))
+    (if (ignore-errors (re-search-forward "\\`#![ ]?\\([a-zA-Z_./]+\\)"))
 	(message "insert-shebang: File has shebang line")
       ;; prompt user
       (if (y-or-n-p "File do not have shebang line, \
