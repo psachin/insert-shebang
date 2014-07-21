@@ -132,7 +132,7 @@ extracted."
 	;; if key don't exists
 	(progn
 	  (message "Can't guess file type. Type: 'M-x customize-group RET \
-insert-shebang' to customize"))))))))))
+insert-shebang' to add/customize"))))))))))
 
 (defun insert-shebang-eval (val)
   "Insert shebang with prefix 'eval' string in current buffer.
