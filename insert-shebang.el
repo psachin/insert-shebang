@@ -2,10 +2,10 @@
 
 ;; Copyright (C) 2013-2014  Sachin Patil
 
-;; Author: Sachin Patil <isachin@iitb.ac.in>
+;; Author: Sachin Patil <iclcoolster@gmail.com>
 ;; URL: http://github.com/psachin/insert-shebang
 ;; Keywords: shebang, tool, convenience
-;; Version: 0.9.3
+;; Version: 0.9.4
 
 ;; This file is NOT a part of GNU Emacs.
 
