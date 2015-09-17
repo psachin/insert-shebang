@@ -7,10 +7,10 @@
          git clone https://github.com/psachin/insert-shebang.git
        #+END_SRC sh
 
-** Install 
+** Install
 *** [[http://marmalade-repo.org/packages/insert-shebang][Marmalade]], [[http://melpa.milkbox.net/#/insert-shebang][MELPA]] [[http://melpa.org/#/insert-shebang][file:http://melpa.org/packages/insert-shebang-badge.svg]]
        #+BEGIN_SRC emacs-lisp
-         M-x package-install RET insert-shebang RET 
+         M-x package-install RET insert-shebang RET
        #+END_SRC emacs-lisp
 *** Manual
      - Add directory containing =insert-shebang.el= file to
@@ -23,14 +23,15 @@
        #+BEGIN_SRC emacs-lisp
          (require 'insert-shebang)
        #+END_SRC emacs-lisp
-       
-     - To enable it globally, add:
+
+*** Add hook
+     - To enable it globally, add below code in your Emacs configuration:
       #+BEGIN_SRC emacs-lisp
         (add-hook 'find-file-hook 'insert-shebang)
       #+END_SRC emacs-lisp
-       
+
      - Optionally, run =make= to byte-compile the file.
-       
+
 ** Customize
    - Customize using:
      #+BEGIN_SRC emacs-lisp
@@ -40,22 +41,20 @@
     Defines path to =env=. Default is =/usr/bin/env=.
 *** File Types
     Defines file types.
-*** Custom Headers 
+*** Custom Headers
     *insert-shebang* can be extended to insert header for C, C++ and
     FORTRAN programs etc.
-*** Ignore Extensions 
+*** Ignore Extensions
     Set file types(using extensions) you want to ignore.
 *** Ignored Filename
     Files ignored during the prompt are stored with their full-path
     in =~/.insert-shebang.log= file. Set to *nil* if you want to
-    disable this feature. 
+    disable this feature.
 
-    You can visit this log file using 
+    You can visit this log file using
     #+BEGIN_SRC emacs-lisp
       M-x insert-shebang-open-log-buffer
     #+END_SRC emacs-lisp
 
 ** License
    - See [[https://github.com/psachin/insert-shebang/blob/master/COPYING][COPYING]]
-
-
