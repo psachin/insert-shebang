@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>Insert-shebang by psachin</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+  </head>
+  <body>
+    <section class="page-header">
+      <h1 class="project-name">Insert-shebang</h1>
+      <h2 class="project-tagline">An extension to insert shebang line for GNU Emacs</h2>
+      <a href="https://github.com/psachin/insert-shebang" class="btn">View on GitHub</a>
+      <a href="https://github.com/psachin/insert-shebang/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/psachin/insert-shebang/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
+
+    <section class="main-content">
+      <p>Insert shebang line automatically.</p>
+
+<h3>
+<a id="clone-this-repository" class="anchor" href="#clone-this-repository" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Clone this repository</h3>
+
+<pre><code>git clone https://github.com/psachin/insert-shebang.git
+</code></pre>
+
+<h3>
+<a id="install" class="anchor" href="#install" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Install</h3>
+
+<h4>
+<a id="marmalade-melpa-" class="anchor" href="#marmalade-melpa-" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a href="http://marmalade-repo.org/packages/insert-shebang">Marmalade</a>, <a href="http://melpa.milkbox.net/#/insert-shebang">MELPA</a> <img src="http://melpa.org/packages/insert-shebang-badge.svg" alt="img">
+</h4>
+
+<pre><code>M-x package-install RET insert-shebang RET
+</code></pre>
+
+<h4>
+<a id="manual" class="anchor" href="#manual" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Manual</h4>
+
+<ul>
+<li>
+<p>Add directory containing <code>insert-shebang.el</code> file to <code>load-path</code> in
+your <code>~/.emacs</code> file. For example:</p>
+
+<pre><code>(add-to-list 'load-path "/path/to/insert-shebang")
+</code></pre>
+</li>
+<li>
+<p>To load a package, add:</p>
+
+<pre><code>(require 'insert-shebang)
+</code></pre>
+</li>
+</ul>
+
+<h4>
+<a id="add-hook" class="anchor" href="#add-hook" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Add hook</h4>
+
+<ul>
+<li>
+<p>To enable it globally, add below code in your Emacs configuration:</p>
+
+<pre><code>(add-hook 'find-file-hook 'insert-shebang)
+</code></pre>
+</li>
+<li><p>Optionally run <code>make</code> to byte-compile the file.</p></li>
+</ul>
+
+<h3>
+<a id="customize" class="anchor" href="#customize" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Customize</h3>
+
+<ul>
+<li>
+<p>Customize using:</p>
+
+<pre><code>M-x customize-group RET insert-shebang RET
+</code></pre>
+</li>
+</ul>
+
+<h4>
+<a id="env-path" class="anchor" href="#env-path" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Env Path</h4>
+
+<p>Defines path to <code>env</code>. Default is <code>/usr/bin/env</code>.</p>
+
+<h4>
+<a id="file-types" class="anchor" href="#file-types" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>File Types</h4>
+
+<p>Defines file types.</p>
+
+<h4>
+<a id="custom-headers" class="anchor" href="#custom-headers" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Custom Headers</h4>
+
+<p><strong>insert-shebang</strong> can be extended to insert header for C, C++ and
+FORTRAN programs etc.</p>
+
+<h4>
+<a id="ignore-extensions" class="anchor" href="#ignore-extensions" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Ignore Extensions</h4>
+
+<p>Set file types(using extensions) you want to ignore.</p>
+
+<h4>
+<a id="ignored-file-name" class="anchor" href="#ignored-file-name" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Ignored File-name</h4>
+
+<p>Files ignored during the prompt are stored with their full-path in
+<code>~/.insert-shebang.log</code> file. Set to <code>nil</code> if you want to disable this
+feature.</p>
+
+<p>You can visit this log file using</p>
+
+<pre><code>M-x insert-shebang-open-log-buffer
+</code></pre>
+
+<h3>
+<a id="license" class="anchor" href="#license" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>License</h3>
+
+<ul>
+<li>See <a href="https://github.com/psachin/insert-shebang/blob/master/COPYING">COPYING</a>
+</li>
+</ul>
+
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/psachin/insert-shebang">Insert-shebang</a> is maintained by <a href="https://github.com/psachin">psachin</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
+
+    </section>
+
+  
+  </body>
+</html>
