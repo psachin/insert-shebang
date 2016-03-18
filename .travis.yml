@@ -143,7 +143,6 @@ before_script:
 
 script:
   $EMACS --version && make test EMACS="$EMACS"
-  make clean
 
 ###
 ### settings
