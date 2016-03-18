@@ -1,6 +1,6 @@
 ;;; insert-shebang.el --- Insert shebang line automatically.
 
-;; Copyright (C) 2013-2014  Sachin Patil
+;; Copyright (C) 2013-2016  Sachin Patil
 
 ;; Author: Sachin Patil <iclcoolster@gmail.com>
 ;; URL: http://github.com/psachin/insert-shebang

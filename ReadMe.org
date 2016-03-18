@@ -1,5 +1,5 @@
 * insert-shebang [[https://travis-ci.org/psachin/insert-shebang.png?branch=master][https://travis-ci.org/psachin/insert-shebang.png?branch=master]]
-  Insert shebang line automatically.
+  Insert shebang line automatically for Emacs.
 
 ** Clone
      - Clone this repository
@@ -25,7 +25,8 @@
        #+END_SRC emacs-lisp
 
 *** Add hook
-     - To enable it globally, add below code in your Emacs configuration:
+     - To enable it globally, add below code in your Emacs
+       configuration file:
       #+BEGIN_SRC emacs-lisp
         (add-hook 'find-file-hook 'insert-shebang)
       #+END_SRC emacs-lisp
@@ -56,5 +57,12 @@
       M-x insert-shebang-open-log-buffer
     #+END_SRC emacs-lisp
 
+** Contribute
+   - Feel free to send PRs
+   - Create new issues
+   - Make sure to run tests before sending a PR
+     #+BEGIN_SRC shell
+       make test
+     #+END_SRC
 ** License
    - See [[https://github.com/psachin/insert-shebang/blob/master/COPYING][COPYING]]

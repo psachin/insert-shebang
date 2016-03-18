@@ -36,7 +36,7 @@ env:
     - EMACS=emacs24
     - EMACS=emacs-snapshot
   global:
-    - SOME_TOKEN=some_value
+    - TIMEOUT=1000
 
 ###
 ### allowing build failures
@@ -61,10 +61,10 @@ matrix:
 ### comma-separated list of branches to be reflected in the badge).
 ###
 #
-#  branches:
-#    only:
-#      - master
-#
+branches:
+    only:
+      - master
+
 
 ###
 ### runtime initialization
@@ -143,13 +143,15 @@ before_script:
 
 script:
   $EMACS --version && make test EMACS="$EMACS"
+  make clean
 
 ###
 ### settings
 ###
 
 notifications:
-  email: false
+  email:
+      iclcoolster@gmail.com
 
 #
 # Emacs
