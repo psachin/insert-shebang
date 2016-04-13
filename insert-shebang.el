@@ -26,10 +26,6 @@
 ;; this file to `load-path', and then:
 ;; (require 'insert-shebang)
 ;;
-;; Then enable it globally using:
-;;
-;; (add-hook 'find-file-hook 'insert-shebang)
-
 ;; Customize
 ;; M-x customize-group RET insert-shebang RET
 ;;
@@ -273,6 +269,8 @@ Calls function `insert-shebang-get-extension-and-insert'.  With argument as
 	    (progn
 	      (insert-shebang-get-extension-and-insert (original-buffer-name))))))
     (insert-shebang-get-extension-and-insert (original-buffer-name))))
+
+;;;###autoload(add-hook 'find-file-hook 'insert-shebang)
 
 (provide 'insert-shebang)
 ;;; insert-shebang.el ends here

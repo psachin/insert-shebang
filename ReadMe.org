@@ -24,13 +24,6 @@
          (require 'insert-shebang)
        #+END_SRC emacs-lisp
 
-*** Add hook
-     - To enable it globally, add below code in your Emacs
-       configuration file:
-      #+BEGIN_SRC emacs-lisp
-        (add-hook 'find-file-hook 'insert-shebang)
-      #+END_SRC emacs-lisp
-
      - Optionally, run =make= to byte-compile the file.
 
 ** Customize
