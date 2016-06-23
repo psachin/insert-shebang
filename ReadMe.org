@@ -1,4 +1,7 @@
 * insert-shebang [[https://travis-ci.org/psachin/insert-shebang.png?branch=master][https://travis-ci.org/psachin/insert-shebang.png?branch=master]]
+
+  #+ATTR_HTML: title="Join the chat at https://gitter.im/psachin/insert-shebang"
+  [[https://gitter.im/psachin/insert-shebang?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge][file:https://badges.gitter.im/psachin/insert-shebang.svg]]
   Insert shebang line automatically for Emacs.
 
 ** Clone
