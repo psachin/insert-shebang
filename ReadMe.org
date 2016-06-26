@@ -8,7 +8,7 @@
        #+END_SRC sh
 
 ** Install
-*** [[http://marmalade-repo.org/packages/insert-shebang][Marmalade]], [[http://melpa.milkbox.net/#/insert-shebang][MELPA]] [[http://melpa.org/#/insert-shebang][file:http://melpa.org/packages/insert-shebang-badge.svg]]
+*** Melpa-stable: [[http://stable.melpa.org/#/insert-shebang][file:http://stable.melpa.org/packages/insert-shebang-badge.svg]] [[http://marmalade-repo.org/packages/insert-shebang][Marmalade]]
        #+BEGIN_SRC emacs-lisp
          M-x package-install RET insert-shebang RET
        #+END_SRC emacs-lisp
