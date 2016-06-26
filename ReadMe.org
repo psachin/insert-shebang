@@ -5,24 +5,25 @@
      - Clone this repository
        #+BEGIN_SRC sh
          git clone https://github.com/psachin/insert-shebang.git
-       #+END_SRC sh
+       #+END_SRC
 
 ** Install
 *** Melpa-stable: [[http://stable.melpa.org/#/insert-shebang][file:http://stable.melpa.org/packages/insert-shebang-badge.svg]] [[http://marmalade-repo.org/packages/insert-shebang][Marmalade]]
-       #+BEGIN_SRC emacs-lisp
-         M-x package-install RET insert-shebang RET
-       #+END_SRC emacs-lisp
-*** Manual
+    #+BEGIN_SRC emacs-lisp
+      M-x package-install RET insert-shebang RET
+    #+END_SRC
+
+*** Manual install
      - Add directory containing =insert-shebang.el= file to
        =load-path= in your =~/.emacs= file. For example:
        #+BEGIN_SRC emacs-lisp
          (add-to-list 'load-path "/path/to/insert-shebang/")
-       #+END_SRC emacs-lisp
+       #+END_SRC
 
      - To load a package, add:
        #+BEGIN_SRC emacs-lisp
          (require 'insert-shebang)
-       #+END_SRC emacs-lisp
+       #+END_SRC
 
      - Optionally, run =make= to byte-compile the file.
 
@@ -30,16 +31,21 @@
    - Customize using:
      #+BEGIN_SRC emacs-lisp
        M-x customize-group RET insert-shebang RET
-     #+END_SRC emacs-lisp
+     #+END_SRC
+
 *** Env Path
     Defines path to =env=. Default is =/usr/bin/env=.
+
 *** File Types
     Defines file types.
+
 *** Custom Headers
     *insert-shebang* can be extended to insert header for C, C++ and
     FORTRAN programs etc.
+
 *** Ignore Extensions
     Set file types(using extensions) you want to ignore.
+
 *** Ignored Filename
     Files ignored during the prompt are stored with their full-path
     in =~/.insert-shebang.log= file. Set to *nil* if you want to
@@ -48,14 +54,15 @@
     You can visit this log file using
     #+BEGIN_SRC emacs-lisp
       M-x insert-shebang-open-log-buffer
-    #+END_SRC emacs-lisp
+    #+END_SRC
 
 ** Contribute
    - Feel free to send PRs
    - Create new issues
    - Make sure to run tests before sending a PR
-     #+BEGIN_SRC shell
+     #+BEGIN_SRC sh
        make test
      #+END_SRC
+
 ** License
    - See [[https://github.com/psachin/insert-shebang/blob/master/COPYING][COPYING]]
