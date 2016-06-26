@@ -1,13 +1,16 @@
-2016-04-13  Sachin  <iclcoolster@gmail.com>
+2016-06-26  Sachin  <iclcoolster@gmail.com>
 
-	* No need to add find-file-hook manually
+	* insert-shebang.el(0.9.5):
+
+	* No need to add find-file-hook manually(Thanx to Nick Sandow).
+	* Updated tests.
 
 2014-11-18  Sachin  <iclcoolster@gmail.com>
 
 	* insert-shebang.el(0.9.4):
 
-	- Bug Fixes
-	- Made to work with uniquify.el(Thanx to Kozaki)
+	- Bug Fixes.
+	- Made to work with uniquify.el(Thanx to Kozaki).
 
 2014-01-07  Sachin  <iclcoolster@gmail.com>
 
@@ -15,7 +18,6 @@
 
 	- Lots of Bug fixes.
 	- Open ignored files log with `M-x insert-shebang-open-log-buffer`
-	
 
 2013-10-05  sachin  <isachin@iitb.ac.in>
 
