@@ -1,4 +1,5 @@
 ;;; insert-shebang-test.el --- Tests for insert-shebang.el
+(require 'ert)
 (require 'insert-shebang)
 
 (ert-deftest insert-shebang-env-path-test ()

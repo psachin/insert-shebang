@@ -2,7 +2,6 @@
 ** TODO
    - Sanity check log file for removed/changed file path. May be a
      separate file.
-   - Test cases.
    - Ignore entire directory.
 ** DONE
    - Remove -pkg.el file.

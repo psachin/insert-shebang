@@ -61,7 +61,14 @@
    - Create new issues
    - Make sure to run tests before sending a PR
      #+BEGIN_SRC sh
+       cask --verbose
        make test
+
+       ## alternate commands
+       run-tests.sh
+
+       # travis
+       run-travis-ci.sh
      #+END_SRC
 
 ** License
