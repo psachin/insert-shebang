@@ -10,4 +10,4 @@ echo "ECUKES_EMACS = $ECUKES_EMACS"
 "$ECUKES_EMACS" --version
 echo
 
-exec ./run-tests.sh $TAGS
+sh ./run-tests.sh $TAGS
