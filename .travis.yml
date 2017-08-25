@@ -35,6 +35,7 @@ env:
     - EMACS=emacs23
     - EMACS=emacs24
     - EMACS=emacs25
+    - EMACS=emacs26
     - EMACS=emacs-snapshot
   global:
     - TIMEOUT=1000

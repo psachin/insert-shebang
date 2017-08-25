@@ -1,3 +1,8 @@
+2017-08-25  Sachin  <psachin@redhat.com>
+
+	* Bumped version to 0.9.6
+	* Support for groovy, fish, ruby and php files. Thanks to <smile13241324@gmail.com>
+
 2016-06-26  Sachin  <iclcoolster@gmail.com>
 
 	* insert-shebang.el(0.9.5):

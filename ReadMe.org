@@ -65,10 +65,10 @@
        make test
 
        ## alternate commands
-       run-tests.sh
+       bash ./run-tests.sh
 
        # travis
-       run-travis-ci.sh
+       bash ./run-travis-ci.sh
      #+END_SRC
 
 ** License
