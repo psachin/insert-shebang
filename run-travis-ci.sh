@@ -3,7 +3,8 @@
 cd "$(dirname "$0")"
 
 # PATH to GNU Emacs binary
-ECUKES_EMACS=${EMACS:-"/home/psachin/github/emacs/src/emacs"}
+# ECUKES_EMACS=${EMACS:-"/home/psachin/github/emacs/src/emacs"}
+ECUKES_EMACS=${EMACS:-"emacs"}
 export ECUKES_EMACS
 
 echo "*** Emacs version ***"
