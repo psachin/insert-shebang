@@ -1,11 +1,11 @@
 ;;; insert-shebang.el --- Insert shebang line automatically.
 
-;; Copyright (C) 2013-2018  Sachin Patil
+;; Copyright (C) 2013-2020  Sachin Patil
 
 ;; Author: Sachin Patil <iclcoolster@gmail.com>
-;; URL: http://github.com/psachin/insert-shebang
+;; URL: https://gitlab.com/psachin/insert-shebang
 ;; Keywords: shebang, tool, convenience
-;; Version: 0.9.6
+;; Version: 0.9.7
 
 ;; This file is NOT a part of GNU Emacs.
 
@@ -15,7 +15,7 @@
 
 ;;; Commentary:
 ;; Inserts shebang line automatically
-;; URL: http://github.com/psachin/insert-shebang
+;; URL: https://gitlab.com/psachin/insert-shebang
 
 ;; Install
 
@@ -36,7 +36,8 @@
 (defgroup insert-shebang nil
   "Inserts shebang line automatically."
   :group 'extensions
-  :link '(url-link :tag "Github" "https://github.com/psachin/insert-shebang"))
+  :link '(url-link :tag "github" "https://github.com/psachin/insert-shebang"
+                   :tag "gitlab" "https://gitlab.com/psachin/insert-shebang"))
 
 (defcustom insert-shebang-env-path "/usr/bin/env"
   "Full path to `env' binary.
@@ -61,7 +62,7 @@ terminal."
   :group 'insert-shebang)
 
 (defcustom insert-shebang-ignore-extensions
-  '("txt" "org")
+  '("txt" "org" "el")
   "*Add extensions you want to ignore.
 List of file extensions to be ignored by default."
   :type '(repeat (string :tag "extn"))

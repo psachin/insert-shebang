@@ -1,0 +1,16 @@
+image: iquiw/alpine-emacs
+
+before_script:
+  - apk add make
+
+build:
+  stage: build
+  script:
+    - make clean
+    - make
+
+test:
+  stage: test
+  script:
+    - make clean
+    - make test

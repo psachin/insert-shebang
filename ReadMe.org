@@ -1,11 +1,10 @@
-* insert-shebang [[https://travis-ci.org/psachin/insert-shebang.png?branch=master][https://travis-ci.org/psachin/insert-shebang.png]] [[https://gitter.im/psachin/insert-shebang?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge][https://badges.gitter.im/psachin/insert-shebang.svg]]
-  Insert shebang line automatically for Emacs.
-
+* insert-shebang
+  Insert shebang line automatically.
 ** Clone
-     - Clone this repository
-       #+BEGIN_SRC sh
-         git clone https://github.com/psachin/insert-shebang.git
-       #+END_SRC
+   Clone this repository
+   #+BEGIN_SRC shell
+     git clone https://gitlab.com/psachin/insert-shebang.git
+   #+END_SRC
 
 ** Install
 *** Melpa-stable: [[http://stable.melpa.org/#/insert-shebang][file:http://stable.melpa.org/packages/insert-shebang-badge.svg]] [[http://marmalade-repo.org/packages/insert-shebang][Marmalade]]
@@ -14,8 +13,8 @@
     #+END_SRC
 
 *** Manual install
-     - Add directory containing =insert-shebang.el= file to
-       =load-path= in your =~/.emacs= file. For example:
+     - Add directory containing =insert-shebang.el= file to =load-path= in your
+       =~/.emacs= file. For example:
        #+BEGIN_SRC emacs-lisp
          (add-to-list 'load-path "/path/to/insert-shebang/")
        #+END_SRC
@@ -28,10 +27,10 @@
      - Optionally, run =make= to byte-compile the file.
 
 ** Customize
-   - Customize using:
-     #+BEGIN_SRC emacs-lisp
-       M-x customize-group RET insert-shebang RET
-     #+END_SRC
+   Customize using:
+   #+BEGIN_SRC emacs-lisp
+     M-x customize-group RET insert-shebang RET
+   #+END_SRC
 
 *** Env Path
     Defines path to =env=. Default is =/usr/bin/env=.
@@ -51,24 +50,17 @@
     in =~/.insert-shebang.log= file. Set to *nil* if you want to
     disable this feature.
 
-    You can visit this log file using
+    You can visit this log file using:
     #+BEGIN_SRC emacs-lisp
       M-x insert-shebang-open-log-buffer
     #+END_SRC
 
 ** Contribute
-   - Feel free to send PRs
+   - Feel free to send a [[https://docs.gitlab.com/ee/user/project/merge_requests/][Merge Request]]
    - Create new issues
-   - Make sure to run tests before sending a PR
-     #+BEGIN_SRC sh
-       cask --verbose
+   - Make sure to run tests before sending a Merge Request:
+     #+BEGIN_SRC shell
        make test
-
-       ## alternate commands
-       bash ./run-tests.sh
-
-       # travis
-       bash ./run-travis-ci.sh
      #+END_SRC
 
 ** License
