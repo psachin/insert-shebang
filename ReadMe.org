@@ -1,3 +1,5 @@
+Please visit [[https://gitlab.com/psachin/insert-shebang][GitLab.com/psachin/insert-shebang]] for updates.
+
 * insert-shebang [[https://travis-ci.org/psachin/insert-shebang.png?branch=master][https://travis-ci.org/psachin/insert-shebang.png]] [[https://gitter.im/psachin/insert-shebang?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge][https://badges.gitter.im/psachin/insert-shebang.svg]]
   Insert shebang line automatically for Emacs.
 
