@@ -55,7 +55,8 @@ terminal."
     ("lua" . "lua")
     ("php" . "php")
     ("sh" . "bash")
-    ("pl" . "perl"))
+    ("pl" . "perl")
+    ("raku" . "raku"))
   "*If nil, add all your file extensions and file types here."
   :type '(alist :key-type (string :tag "Extension")
                 :value-type (string :tag "Interpreter"))
